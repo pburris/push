@@ -86,10 +86,9 @@ function drawText(string, x, y, maxWidth) {
 	context.strokeText(string, x, y, maxWidth);
 }
 
-
 //MAIN
 initCanvas();
 draw();
 loop = setInterval(main = function() {
-				draw();
-		}, 1000);
+	draw();
+}, 1000);
