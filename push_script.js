@@ -16,12 +16,19 @@ var player = {
 	movement_x:0,
 	movement_y:0,
 	updatePosition: function(){
-		position_x = position_x + movement_x;
-		position_y = position_y + movement_y;
-	}
-	canMove: function(displacement_x, displament_y) {
-
-	}
+		if player.canMoveX(player.position_x + player.movement_x){
+			player.position_x = player.position_x + player.movement_x;
+		}
+		if player.canMoveY(player.position_y + player.movement_y){
+			player.position_y = player.position_y + player.movement_y;
+		}
+	},
+	canMoveX: function(displacement_x) {
+		return ((displacment_x > 0) && (displacement_x < (canvas.width - radius*2)))
+	},
+	canMoveY: function(displacement_y) {
+		return ((displacment_y > 0) && (diplacement_y < (canvas.height - raduis*2)))
+	},
 };
 
 window.addEventListener("keydown", /*keydown =*/ function(event) {
@@ -101,7 +108,7 @@ loop = setInterval(main = function() {
 	player.updatePosition();
 	draw();
 	// I'm pretty sure you need to add player.movement_N to the player.position_N to get it to move...
-}, 100);
+}, 33);
 // If you're only calling the 'draw' function in your setinterval, you can do it like this:
 // setInterval(draw, 1000);
 // The 'loop' variable contains the ID of the interval, so you can call 'clearInterval(ID);' later, but you never do this.
