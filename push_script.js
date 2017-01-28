@@ -4,28 +4,25 @@ var direction = {
 	right:39,
 	down:40 // You don't need a comma for the last property, but it's fine if there is one.
 }; // You needed a semicolon when initialising variables to an object.
+
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+var radius = 20;
+
 var player = {
 	color:"blue",
 	position_x:0,
 	position_y:0,
 	movement_x:0,
 	movement_y:0,
+	updatePosition: function(){
+		position_x = position_x + movement_x;
+		position_y = position_y + movement_y;
+	}
 	canMove: function(displacement_x, displament_y) {
-		//check if potential movement is possible
-		//if(){return true;}
-		//else{return false;}
-		
-		// fun fact, if you're returning a boolean, you don't really need the if statement. Example:
-		// return 5 < 4;
-		// That will always return false.
-    }
-};
 
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
-var centerX = canvas.width / 2;
-var centerY = canvas.height / 2;
-var radius = 70;
+	}
+};
 
 window.addEventListener("keydown", /*keydown =*/ function(event) {
 	switch(event.keyCode){
@@ -65,23 +62,26 @@ window.addEventListener("keyup", /*keyup =*/ function(event) {
 		
 function draw() { // Draw entire frame.
 	context.beginPath(); // Clear canvas.
-	context.fillStyle = "black";
-	context.rect(0, 0, canvas.width, canvas.height);
-	context.fill();
+	var my_gradient = context.createLinearGradient(0, 0, 0, canvas.height);
+	my_gradient.addColorStop(0, "Cornflowerblue");
+	my_gradient.addColorStop(1, "LightSteelBlue");
+	context.fillStyle = my_gradient;
+	context.fillRect(0, 0, canvas.width, canvas.height);
+	//context.fill();
 	
 	context.beginPath();
-	context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-	context.fillStyle = 'blue';
+	context.arc(player.position_x + player.movement_x, player.position_y + player.movement_y, radius, 0, 2 * Math.PI, false);
+	context.fillStyle = player.color;
 	context.fill();
-	context.lineWidth = 5;
+	context.lineWidth = 4;
 	context.strokeStyle = '#003300';
 	context.stroke();
 }
 		
 function initCanvas() { // Setup canvas with context and dimensions.
 	canvas = document.getElementById("myCanvas");
-	//canvas.width = cols * tileSize; The variable 'cols' is never initialised.
-	//canvas.height = rows * tileSize; The variable 'rows' is never initialised.
+	canvas.width = 300;
+	canvas.height = 300;
 	context = canvas.getContext("2d");
 }
 
@@ -93,12 +93,15 @@ function drawText(string, x, y, maxWidth) {
 }
 
 //MAIN
-initCanvas();
+//initCanvas();
 draw();
+player.position_y = canvas.height / 2;
+player.position_x = canvas.width / 2;
 loop = setInterval(main = function() {
+	player.updatePosition();
 	draw();
 	// I'm pretty sure you need to add player.movement_N to the player.position_N to get it to move...
-}, 1000);
+}, 100);
 // If you're only calling the 'draw' function in your setinterval, you can do it like this:
 // setInterval(draw, 1000);
 // The 'loop' variable contains the ID of the interval, so you can call 'clearInterval(ID);' later, but you never do this.
