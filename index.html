@@ -15,7 +15,6 @@
 	</script>
 
 	<title>Push</title>
-	<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
 	
 	<style type="text/CSS">
 		body {
@@ -41,7 +40,7 @@
 <body>
 
 	<center>
-		<iframe id="iframe" src="./psh_canvas.html" frameborder=0></iframe>
+		<iframe id="iframe" src="./push_canvas.html" frameborder=0></iframe>
 	</center>
 	
 	<script>
@@ -49,23 +48,6 @@
 		iframe.height = Math.min(window.innerHeight, window.innerWidth);
 		iframe.width = iframe.height;
 		
-		var instructions = document.getElementById("instructions");
-		instructions.style.left = window.innerWidth / 2 - 315 + "px";
-		instructions.style.top = window.innerHeight / 4 + "px";
-		instructions.style.display = "block";
-		
-		var closeBtn = document.getElementById("closeBtn");
-		closeBtn.addEventListener("click", function() {
-			instructions.style.display = "none";
-			if (iframe.focus) {
-				iframe.focus();
-			}
-			if (iframe.contentWindow) {
-				iframe.contentWindow.focus();
-			} else if (iframe.contentDocument && iframe.contentDocument.documentElement) {
-				// For old versions of Safari
-				iframe.contentDocument.documentElement.focus();
-			}
 		});
 	</script>
 	
