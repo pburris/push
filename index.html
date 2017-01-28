@@ -4,7 +4,7 @@
 
 <head>
 
-	<script>
+	<script> <!-- This script redirects the page to the chrome download page if the brower is IE or Microsoft Edge. You might not want this.--> 
 		if (navigator.appName == 'Microsoft Internet Explorer' ||
 				!!(navigator.userAgent.match(/Trident/) ||
 				navigator.userAgent.match(/rv 11/)) ||
@@ -16,6 +16,8 @@
 
 	<title>Push</title>
 	
+	<!--<link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/> You don't need this because you don't have a favicon.ico file yet. -->
+	
 	<style type="text/CSS">
 		body {
 			margin: 0px;
@@ -25,14 +27,17 @@
 		#iframe {
 			display: inline-block;
 		}
+		/*
 		.noselect {
-			-webkit-touch-callout: none; /* iOS Safari */
-			-webkit-user-select: none; /* Safari*/
-			-khtml-user-select: none; /* Konqueror */
-			-moz-user-select: none; /* Firefox */
-			-ms-user-select: none; /* Internet Explorer/Edge */
-            user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
 		}
+		This isn't used.
+		*/
 	</style>
 	
 </head>
@@ -48,7 +53,41 @@
 		iframe.height = Math.min(window.innerHeight, window.innerWidth);
 		iframe.width = iframe.height;
 		
-		});
+		/*
+		var instructions = document.getElementById("instructions");
+		instructions.style.left = window.innerWidth / 2 - 315 + "px";
+		instructions.style.top = window.innerHeight / 4 + "px";
+		instructions.style.display = "block";
+		
+		You don't have an 'instructions' element yet.
+		*/
+		
+		/*
+		You don't have a 'closeBtn' element yet.
+		
+		var closeBtn = document.getElementById("closeBtn");
+		closeBtn.addEventListener("click", function() {
+			instructions.style.display = "none";
+			if (iframe.focus) {
+				iframe.focus();
+			}
+			if (iframe.contentWindow) {
+				iframe.contentWindow.focus();
+			} else if (iframe.contentDocument && iframe.contentDocument.documentElement) {
+				// For old versions of Safari
+				iframe.contentDocument.documentElement.focus();
+			}
+		});*/
+		
+		if (iframe.focus) { // Focuses the iframe so key events are directed to it.
+			iframe.focus();
+		}
+		if (iframe.contentWindow) {
+			iframe.contentWindow.focus();
+		} else if (iframe.contentDocument && iframe.contentDocument.documentElement) {
+			// For old versions of Safari
+			iframe.contentDocument.documentElement.focus();
+		}
 	</script>
 	
 </body>
