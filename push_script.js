@@ -16,18 +16,18 @@ var player = {
 	movement_x:0,
 	movement_y:0,
 	updatePosition: function(){
-		if player.canMoveX(player.position_x + player.movement_x){
+		if (player.canMoveX(player.position_x + player.movement_x)){
 			player.position_x = player.position_x + player.movement_x;
 		}
-		if player.canMoveY(player.position_y + player.movement_y){
+		if (player.canMoveY(player.position_y + player.movement_y)){
 			player.position_y = player.position_y + player.movement_y;
 		}
 	},
 	canMoveX: function(displacement_x) {
-		return ((displacment_x > 0) && (displacement_x < (canvas.width - radius*2)))
+		return ((displacement_x > radius) && (displacement_x < (canvas.width - radius)))
 	},
 	canMoveY: function(displacement_y) {
-		return ((displacment_y > 0) && (diplacement_y < (canvas.height - raduis*2)))
+		return ((displacement_y > radius) && (displacement_y < (canvas.height - radius)))
 	},
 };
 
@@ -77,7 +77,7 @@ function draw() { // Draw entire frame.
 	//context.fill();
 	
 	context.beginPath();
-	context.arc(player.position_x + player.movement_x, player.position_y + player.movement_y, radius, 0, 2 * Math.PI, false);
+	context.arc(player.position_x, player.position_y, radius, 0, 2 * Math.PI, false);
 	context.fillStyle = player.color;
 	context.fill();
 	context.lineWidth = 4;
