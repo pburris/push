@@ -87,8 +87,8 @@ function draw() { // Draw entire frame.
 		
 function initCanvas() { // Setup canvas with context and dimensions.
 	canvas = document.getElementById("myCanvas");
-	canvas.width = 300;
-	canvas.height = 300;
+	canvas.width = parent.document.body.clientWidth;
+	canvas.height = parent.document.body.clientHeight;
 	context = canvas.getContext("2d");
 }
 
@@ -100,7 +100,7 @@ function drawText(string, x, y, maxWidth) {
 }
 
 //MAIN
-//initCanvas();
+initCanvas();
 draw();
 player.position_y = canvas.height / 2;
 player.position_x = canvas.width / 2;
